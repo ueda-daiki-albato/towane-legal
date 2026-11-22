@@ -11,14 +11,14 @@ https://ueda-daiki-albato.github.io/towane-legal/
 | 利用規約 | `/terms.html` |
 | 特定商取引法に基づく表記 | `/tokushoho.html` |
 | 資金決済法に基づく表示 | `/funds.html` |
-| アカウントの削除について | `/delete-account.html`（Google Play の「アカウントの削除」の URL に使う。`mellows-rewrite` で追加・未公開） |
+| アカウントの削除について | `/delete-account.html`（Google Play の「アカウントの削除」の URL に使う。`mellows-rewrite` で追加） |
 
 ## 2026-11-20 の書き直し（ブランチ `mellows-rewrite`）
 
 トワネを「ポイ活×AIキャラチャット・18歳以上だけ」に作り変えるのに合わせて、全ページを書き直した。
 仕様の正は設計書（`ai-character-app/docs/01〜07`）。**main に入れるのはオーナーの確認後。**
 
-- 各ページの先頭に「下書き・未公開」の囲み（`data-draft`）がある。公開するときに消し、日付を公開日に直す
+- 公開リポジトリなので、HTML コメントに社内メモ（要確認・下書き・変更の説明）を書かない。確認待ちの点は towane（非公開）の `docs/legal-open-questions.md` に書く
 - 「（未確定）」と書いた項目（読み上げ・通話の事業者、中国系の事業者の国、分析の事業者）は、決まったら直す
 - 以前の版（13歳以上・コイン・トワネパス・OpenAI）は main の履歴に残る
 
