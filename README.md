@@ -12,6 +12,7 @@ https://ueda-daiki-albato.github.io/towane-legal/
 | 特定商取引法に基づく表記 | `/tokushoho.html` |
 | 資金決済法に基づく表示 | `/funds.html` |
 | 特定商取引法に基づく表記（Web版） | `/tokushoho-web.html`（Web 版の購入画面からだけリンクする。**他のページ・アプリからはリンクしない**。`noindex`。公開して案内を始めるときに外すか決める） |
+| Web版 追加規約 | `/terms-web.html`（Web 版の登録・購入画面からだけリンクする。**他のページ・アプリからはリンクしない**。`noindex`。本規約の一部。Web の購入の条項はここにだけ書く） |
 | アカウントの削除について | `/delete-account.html`（Google Play の「アカウントの削除」の URL に使う。`mellows-rewrite` で追加） |
 
 ## 2026-11-20 の書き直し（ブランチ `mellows-rewrite`）
@@ -69,7 +70,15 @@ Web 版（トワネのブラウザ版）の提供に合わせて、規約・ポ�
 **main に入れるのはオーナーの確認後。**
 
 - 画面上で目立つ `【要記入】`・`【決定待ち】`・`【要確認】`（黄色の印）が残っている。公開の前に `grep -rn 'class="todo"' *.html` で全部消えていることを確かめる
-- アプリから開くページ（`terms.html`・`privacy.html`・`funds.html`・`tokushoho.html`）には、Web 版の値段・支払い方法・購入ページへのリンクを書かない（Apple 3.1.1）。Web の支払い方法・カードの扱いは `tokushoho-web.html` に書く
+- **アプリから開くページ（`terms.html`・`privacy.html`・`funds.html`・`tokushoho.html`・`delete-account.html`）には、Web 版の購入の条項・決済手段・値段・購入ページへのリンクを書かない**（Apple 3.1.1。2026-11-24 のオーナー決定）。Web の購入の条項（決済代行・カード情報を持たない・最終確認・返品不可と例外・決済取消しでのポイント取消し・不正決済への措置）は `terms-web.html`、支払い方法・カードの扱いは `tokushoho-web.html` にだけ書く。この2ページは `noindex` で、アプリと他のページからリンクしない（2ページの間と、2ページから他の規約へのリンクは可）
+- `terms.html` には「Web 版には Web版 追加規約が適用される」とだけ書く（リンクなし）。`privacy.html` には決済代行事業者（GMOイプシロン）と reCAPTCHA を、Web 版の利用者にだけ関わる提供先として残す（値段・購入ページは書かない）
+- 同意の版（`consentVersion`）は上げない（2026-11-24 のオーナー決定）。Web 版の登録画面で、そのときの最新版（`terms.html`・`privacy.html`・`terms-web.html`）への同意を取る前提
 - アプリ用の `tokushoho.html` は変えていない（請求により開示の方式のまま）
-- `tokushoho-web.html` の運営統括責任者・電話番号は、`tokushoho.html` と違い**省略せず書く**（fincode の審査の見本が明記を求めるため）。氏名・電話番号が決まったら、オーナーの了承を得て入れる（上の「運営者の表記に個人名を書かない」の例外になる。弁護士に確かめる）
-- 同意の版（`consentVersion`）は、設計では上げない。ただし `privacy.html` に事業者（決済代行・reCAPTCHA）を足したので、上げるかの判断はオーナーと弁護士（報告に理由あり）
+- `tokushoho-web.html` の運営統括責任者（代表取締役の氏名）・電話番号（トワネ専用の050番号）は、`tokushoho.html` と違い**省略せず書く**（fincode の審査の見本が明記を求めるため）。実際の氏名・番号が決まったら、オーナーの了承を得て入れる（上の「運営者の表記に個人名を書かない」の例外になる。弁護士に確かめる）
+
+### 公開前の確認
+
+1. `grep -rn 'class="todo"' *.html` が 0 件
+2. アプリから開くページに購入の記述が無い：`grep -n 'terms-web\|tokushoho-web\|fincode\|Web版での購入\|Web版で購入' terms.html privacy.html funds.html tokushoho.html delete-account.html index.html` で、購入への案内（リンク・値段・支払い手段）が出ないこと（privacy の GMOイプシロン・reCAPTCHA の行は可）
+3. 閉じタグの対応：正規表現で数える（各ページで `table` `tr` `td` `th` `ol` `ul` `li` `h2` `p` `div` `main` `mark` の開きと閉じの数が一致）
+4. `terms-web.html`・`tokushoho-web.html` が `noindex,nofollow` で、`terms-web` へのリンクが `tokushoho-web.html`・`terms-web.html` 以外に無いこと
