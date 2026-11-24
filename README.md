@@ -11,6 +11,7 @@ https://ueda-daiki-albato.github.io/towane-legal/
 | 利用規約 | `/terms.html` |
 | 特定商取引法に基づく表記 | `/tokushoho.html` |
 | 資金決済法に基づく表示 | `/funds.html` |
+| 特定商取引法に基づく表記（Web版） | `/tokushoho-web.html`（Web 版の購入画面からだけリンクする。**他のページ・アプリからはリンクしない**。`noindex`。公開して案内を始めるときに外すか決める） |
 | アカウントの削除について | `/delete-account.html`（Google Play の「アカウントの削除」の URL に使う。`mellows-rewrite` で追加） |
 
 ## 2026-11-20 の書き直し（ブランチ `mellows-rewrite`）
@@ -61,3 +62,14 @@ https://ueda-daiki-albato.github.io/towane-legal/
   合わせてある。退会で消すもの・残すものを実装で変えたら、3つを一緒に直す。
   「アプリを使えない場合はメールで依頼 → 7日以内に当社で削除」と書いたので、**運営が uid を指定して退会の処理を流す手順**
   （本体の `scripts/ops`）が要る（2026-11-20 時点では無い）
+
+## 2026-11-24 の Web 版の追記（ブランチ `web-version`）
+
+Web 版（トワネのブラウザ版）の提供に合わせて、規約・ポリシー・表示を足した。設計書は towane（非公開）の `docs/web-design.md` §6・`docs/web-billing.md` §6。
+**main に入れるのはオーナーの確認後。**
+
+- 画面上で目立つ `【要記入】`・`【決定待ち】`・`【要確認】`（黄色の印）が残っている。公開の前に `grep -rn 'class="todo"' *.html` で全部消えていることを確かめる
+- アプリから開くページ（`terms.html`・`privacy.html`・`funds.html`・`tokushoho.html`）には、Web 版の値段・支払い方法・購入ページへのリンクを書かない（Apple 3.1.1）。Web の支払い方法・カードの扱いは `tokushoho-web.html` に書く
+- アプリ用の `tokushoho.html` は変えていない（請求により開示の方式のまま）
+- `tokushoho-web.html` の運営統括責任者・電話番号は、`tokushoho.html` と違い**省略せず書く**（fincode の審査の見本が明記を求めるため）。氏名・電話番号が決まったら、オーナーの了承を得て入れる（上の「運営者の表記に個人名を書かない」の例外になる。弁護士に確かめる）
+- 同意の版（`consentVersion`）は、設計では上げない。ただし `privacy.html` に事業者（決済代行・reCAPTCHA）を足したので、上げるかの判断はオーナーと弁護士（報告に理由あり）
